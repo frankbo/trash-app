@@ -1,24 +1,57 @@
 import React from "react";
-import { Button, StyleSheet, Text, View } from "react-native";
-import { StackNavigationProp } from "@react-navigation/stack";
-import { StackParamList } from "../../../App";
+import { FlatList, ListRenderItem, StyleSheet, Text, View } from "react-native";
+import data from "../../../mocks/example-calendar.json";
+/**
+ * Backend related Code
+ */
+const getTimestamp = (weirdDate: string) =>
+  new Date(
+    weirdDate.substring(0, 4) +
+      "-" +
+      weirdDate.substring(4, 6) +
+      "-" +
+      weirdDate.substr(6, weirdDate.length)
+  ).getTime();
 
-type ProfileScreenNavigationProp = StackNavigationProp<
-  StackParamList,
-  "Profile"
->;
+const DATA = data.vcalendar[0].vevent.sort(
+  (a, b) =>
+    getTimestamp(a.dtstart[0] as string) - getTimestamp(b.dtstart[0] as string)
+);
 
-interface Props {
-  navigation: ProfileScreenNavigationProp;
+/**
+ * End of backend
+ */
+
+interface Item {
+  categories: string;
+  location: string;
+  summary: string;
+  uid: string;
+  class: string;
+  dtstart: (
+    | string
+    | {
+        value: string;
+      }
+  )[];
+  dtstamp: string;
+  description: string;
 }
 
-export const Main: React.FC<Props> = ({ navigation }) => {
+const RenderItem: ListRenderItem<Item> = ({ item }) => (
+  <View style={styles.item}>
+    <Text>{item.summary}</Text>
+    <Text>{item.dtstart[0]}</Text>
+  </View>
+);
+
+export const Main: React.FC = () => {
   return (
     <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
-      <Button
-        title="Go to Profile"
-        onPress={() => navigation.push("Profile")}
+      <FlatList
+        data={DATA}
+        renderItem={RenderItem}
+        keyExtractor={(item) => item.uid}
       />
     </View>
   );
@@ -30,5 +63,11 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
     alignItems: "center",
     justifyContent: "center",
+  },
+  item: {
+    flex: 1,
+    backgroundColor: "#4287f5",
+    justifyContent: "center",
+    margin: 4,
   },
 });
