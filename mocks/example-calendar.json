@@ -1,0 +1,314 @@
+{
+  "vcalendar": [
+    {
+      "method": "PUBLISH",
+      "x-wr-timezone": "Europe/Berlin",
+      "prodid": "http://www.bad-berleburg.de",
+      "calscale": "GREGORIAN",
+      "version": "2.0",
+      "vevent": [
+        {
+          "categories": " Abfallkalender",
+          "location": " Aue - Alle Straen",
+          "summary": "Biomlltonne: Aue",
+          "uid": "70570468185e224ce8fc7ff7955a43d0",
+          "class": "PUBLIC",
+          "dtstart": ["20210302", { "value": "DATE" }],
+          "dtstamp": "20201217T000000Z",
+          "description": "Biomlltonne - Alle Straen\\n \\nNchster Abholtermin ist am: 16.03.2021"
+        },
+        {
+          "categories": " Abfallkalender",
+          "location": " Aue - Alle Straen",
+          "summary": "Biomlltonne: Aue",
+          "uid": "d2230ad8ecfca35ffd48119d39a22d02",
+          "class": "PUBLIC",
+          "dtstart": ["20210316", { "value": "DATE" }],
+          "dtstamp": "20201217T000000Z",
+          "description": "Biomlltonne - Alle Straen\\n \\nNchster Abholtermin ist am: 30.03.2021"
+        },
+        {
+          "categories": " Abfallkalender",
+          "location": " Aue - Alle Straen",
+          "summary": "Biomlltonne: Aue",
+          "uid": "556ae7a37ead40ae63090f40e49541dc",
+          "class": "PUBLIC",
+          "dtstart": ["20210330", { "value": "DATE" }],
+          "dtstamp": "20201217T000000Z",
+          "description": "Biomlltonne - Alle Straen\\n \\nNchster Abholtermin ist am: 13.04.2021"
+        },
+        {
+          "categories": " Abfallkalender",
+          "location": " Aue - Alle Straen",
+          "summary": "Biomlltonne: Aue",
+          "uid": "7c6af71a98a42f385b9d8401e73aaa47",
+          "class": "PUBLIC",
+          "dtstart": ["20210413", { "value": "DATE" }],
+          "dtstamp": "20201217T000000Z",
+          "description": "Biomlltonne - Alle Straen\\n \\nNchster Abholtermin ist am: 27.04.2021"
+        },
+        {
+          "categories": " Abfallkalender",
+          "location": " Aue - Alle Straen",
+          "summary": "Biomlltonne: Aue",
+          "uid": "1f2d962cbebec733e038e5f1483f08b2",
+          "class": "PUBLIC",
+          "dtstart": ["20210427", { "value": "DATE" }],
+          "dtstamp": "20201217T000000Z",
+          "description": "Biomlltonne - Alle Straen\\n \\nNchster Abholtermin ist am: 11.05.2021"
+        },
+        {
+          "categories": " Abfallkalender",
+          "location": " Aue - Alle Straen",
+          "summary": "Biomlltonne: Aue",
+          "uid": "ebf3c059fef24fabba77a072892598ec",
+          "class": "PUBLIC",
+          "dtstart": ["20210511", { "value": "DATE" }],
+          "dtstamp": "20201217T000000Z",
+          "description": "Biomlltonne - Alle Straen\\n \\nNchster Abholtermin ist am: 26.05.2021"
+        },
+        {
+          "categories": " Abfallkalender",
+          "location": " Aue - Alle Straen",
+          "summary": "Biomlltonne: Aue",
+          "uid": "67160243ae37a390326090c7daeb7601",
+          "class": "PUBLIC",
+          "dtstart": ["20210526", { "value": "DATE" }],
+          "dtstamp": "20201217T000000Z",
+          "description": "Biomlltonne - Alle Straen\\n \\n"
+        },
+        {
+          "categories": " Abfallkalender",
+          "location": " Aue - Alle Straen",
+          "summary": "Gelbe Tonne: Aue",
+          "uid": "2c246520a5f25c812429494551e4e74a",
+          "class": "PUBLIC",
+          "dtstart": ["20210308", { "value": "DATE" }],
+          "dtstamp": "20201217T000000Z",
+          "description": "Gelbe Tonne - Alle Straen\\n \\nNchster Abholtermin ist am: 22.03.2021"
+        },
+        {
+          "categories": " Abfallkalender",
+          "location": " Aue - Alle Straen",
+          "summary": "Gelbe Tonne: Aue",
+          "uid": "de3ea215d418cfe28b755268579ebc62",
+          "class": "PUBLIC",
+          "dtstart": ["20210322", { "value": "DATE" }],
+          "dtstamp": "20201217T000000Z",
+          "description": "Gelbe Tonne - Alle Straen\\n \\nNchster Abholtermin ist am: 06.04.2021"
+        },
+        {
+          "categories": " Abfallkalender",
+          "location": " Aue - Alle Straen",
+          "summary": "Gelbe Tonne: Aue",
+          "uid": "20440265b2fecf9ec989017a9a134b25",
+          "class": "PUBLIC",
+          "dtstart": ["20210406", { "value": "DATE" }],
+          "dtstamp": "20201217T000000Z",
+          "description": "Gelbe Tonne - Alle Straen\\n \\nNchster Abholtermin ist am: 19.04.2021"
+        },
+        {
+          "categories": " Abfallkalender",
+          "location": " Aue - Alle Straen",
+          "summary": "Gelbe Tonne: Aue",
+          "uid": "0c4417b32d5cbbb5dcf7eea2d19df504",
+          "class": "PUBLIC",
+          "dtstart": ["20210419", { "value": "DATE" }],
+          "dtstamp": "20201217T000000Z",
+          "description": "Gelbe Tonne - Alle Straen\\n \\nNchster Abholtermin ist am: 03.05.2021"
+        },
+        {
+          "categories": " Abfallkalender",
+          "location": " Aue - Alle Straen",
+          "summary": "Gelbe Tonne: Aue",
+          "uid": "0465d9149a54298c5987e9ebaf3f3d16",
+          "class": "PUBLIC",
+          "dtstart": ["20210503", { "value": "DATE" }],
+          "dtstamp": "20201217T000000Z",
+          "description": "Gelbe Tonne - Alle Straen\\n \\nNchster Abholtermin ist am: 17.05.2021"
+        },
+        {
+          "categories": " Abfallkalender",
+          "location": " Aue - Alle Straen",
+          "summary": "Gelbe Tonne: Aue",
+          "uid": "fe02a894aa2a6d59e4ef986acc2c07fb",
+          "class": "PUBLIC",
+          "dtstart": ["20210517", { "value": "DATE" }],
+          "dtstamp": "20201217T000000Z",
+          "description": "Gelbe Tonne - Alle Straen\\n \\nNchster Abholtermin ist am: 31.05.2021"
+        },
+        {
+          "categories": " Abfallkalender",
+          "location": " Aue - Alle Straen",
+          "summary": "Gelbe Tonne: Aue",
+          "uid": "a058fe8944b507436034638629601464",
+          "class": "PUBLIC",
+          "dtstart": ["20210531", { "value": "DATE" }],
+          "dtstamp": "20201217T000000Z",
+          "description": "Gelbe Tonne - Alle Straen\\n \\n"
+        },
+        {
+          "categories": " Abfallkalender",
+          "location": " Aue - Alle Straen",
+          "summary": "Papiertonne / Papiercontainer: Aue",
+          "uid": "7755d552e6408ba9a50da26356790a47",
+          "class": "PUBLIC",
+          "dtstart": ["20210302", { "value": "DATE" }],
+          "dtstamp": "20201217T000000Z",
+          "description": "Papiertonne / Papiercontainer - Alle Straen\\n \\nNchster Abholtermin ist am: 30.03.2021"
+        },
+        {
+          "categories": " Abfallkalender",
+          "location": " Aue - Alle Straen",
+          "summary": "Papiertonne / Papiercontainer: Aue",
+          "uid": "3f8571b6924837b47aa46b08ba59f1e2",
+          "class": "PUBLIC",
+          "dtstart": ["20210330", { "value": "DATE" }],
+          "dtstamp": "20201217T000000Z",
+          "description": "Papiertonne / Papiercontainer - Alle Straen\\n \\nNchster Abholtermin ist am: 27.04.2021"
+        },
+        {
+          "categories": " Abfallkalender",
+          "location": " Aue - Alle Straen",
+          "summary": "Papiertonne / Papiercontainer: Aue",
+          "uid": "c2c6779ab5259cb7d8d4725496f75203",
+          "class": "PUBLIC",
+          "dtstart": ["20210427", { "value": "DATE" }],
+          "dtstamp": "20201217T000000Z",
+          "description": "Papiertonne / Papiercontainer - Alle Straen\\n \\nNchster Abholtermin ist am: 26.05.2021"
+        },
+        {
+          "categories": " Abfallkalender",
+          "location": " Aue - Alle Straen",
+          "summary": "Papiertonne / Papiercontainer: Aue",
+          "uid": "b97bf5a052d66c8b4fee139bd6637532",
+          "class": "PUBLIC",
+          "dtstart": ["20210526", { "value": "DATE" }],
+          "dtstamp": "20201217T000000Z",
+          "description": "Papiertonne / Papiercontainer - Alle Straen\\n \\n"
+        },
+        {
+          "categories": " Abfallkalender",
+          "location": " Aue - Alle Straen",
+          "summary": "Restmlltonne: Aue",
+          "uid": "9c8dc6f9bef6cb787a0a88b2005103eb",
+          "class": "PUBLIC",
+          "dtstart": ["20210311", { "value": "DATE" }],
+          "dtstamp": "20201217T000000Z",
+          "description": "Restmlltonne - Alle Straen\\n \\nNchster Abholtermin ist am: 25.03.2021"
+        },
+        {
+          "categories": " Abfallkalender",
+          "location": " Aue - Alle Straen",
+          "summary": "Restmlltonne: Aue",
+          "uid": "eb5e80da29a3622c5f6275b38395ad07",
+          "class": "PUBLIC",
+          "dtstart": ["20210325", { "value": "DATE" }],
+          "dtstamp": "20201217T000000Z",
+          "description": "Restmlltonne - Alle Straen\\n \\nNchster Abholtermin ist am: 09.04.2021"
+        },
+        {
+          "categories": " Abfallkalender",
+          "location": " Aue - Alle Straen",
+          "summary": "Restmlltonne: Aue",
+          "uid": "12e87b9799badcb8badb068407989845",
+          "class": "PUBLIC",
+          "dtstart": ["20210409", { "value": "DATE" }],
+          "dtstamp": "20201217T000000Z",
+          "description": "Restmlltonne - Alle Straen\\n \\nNchster Abholtermin ist am: 22.04.2021"
+        },
+        {
+          "categories": " Abfallkalender",
+          "location": " Aue - Alle Straen",
+          "summary": "Restmlltonne: Aue",
+          "uid": "a09594176ced403b181e8ed2e0744317",
+          "class": "PUBLIC",
+          "dtstart": ["20210422", { "value": "DATE" }],
+          "dtstamp": "20201217T000000Z",
+          "description": "Restmlltonne - Alle Straen\\n \\nNchster Abholtermin ist am: 06.05.2021"
+        },
+        {
+          "categories": " Abfallkalender",
+          "location": " Aue - Alle Straen",
+          "summary": "Restmlltonne: Aue",
+          "uid": "003aa3b13fbc2ba1d4b34c74c23b2b05",
+          "class": "PUBLIC",
+          "dtstart": ["20210506", { "value": "DATE" }],
+          "dtstamp": "20201217T000000Z",
+          "description": "Restmlltonne - Alle Straen\\n \\nNchster Abholtermin ist am: 20.05.2021"
+        },
+        {
+          "categories": " Abfallkalender",
+          "location": " Aue - Alle Straen",
+          "summary": "Restmlltonne: Aue",
+          "uid": "40519cc61e2f00f9995ecd8c5cf2ed4f",
+          "class": "PUBLIC",
+          "dtstart": ["20210520", { "value": "DATE" }],
+          "dtstamp": "20201217T000000Z",
+          "description": "Restmlltonne - Alle Straen\\n \\n"
+        },
+        {
+          "categories": " Abfallkalender",
+          "location": " Aue - Alle Straen",
+          "summary": "Schadstoffsammlung: Aue",
+          "uid": "476275641e012cb7e24d7a2db65d426a",
+          "class": "PUBLIC",
+          "dtstart": ["20210424", { "value": "DATE" }],
+          "dtstamp": "20201217T000000Z",
+          "description": "Schadstoffsammlung - Alle Straen\\n \\n"
+        },
+        {
+          "categories": " Abfallkalender",
+          "location": " Aue - Alle Straen",
+          "summary": "Sperrige Grnabflle: Aue",
+          "uid": "176369ad25e250a76a9b7e20769b8c4b",
+          "class": "PUBLIC",
+          "dtstart": ["20210412", { "value": "DATE" }],
+          "dtstamp": "20201217T000000Z",
+          "description": "Sperrige Grnabflle - Alle Straen\\n \\nBemerkung: Nur mit angemeldeter Biotonne! Abfuhr muss gesondert beantragt werden. Anmeldetermine: 29.03. - 03.04. ber Anforderungskarte oder online unter www.bad-berleburg.de/gruenabfaelle\\n\\nNchster Abholtermin ist am: 13.04.2021"
+        },
+        {
+          "categories": " Abfallkalender",
+          "location": " Aue - Alle Straen",
+          "summary": "Sperrige Grnabflle: Aue",
+          "uid": "9f4d66fec81c1abc5154df15f184b6f7",
+          "class": "PUBLIC",
+          "dtstart": ["20210413", { "value": "DATE" }],
+          "dtstamp": "20201217T000000Z",
+          "description": "Sperrige Grnabflle - Alle Straen\\n \\nBemerkung: Nur mit angemeldeter Biotonne! Abfuhr muss gesondert beantragt werden. Anmeldetermine: 29.03. - 03.04. ber Anforderungskarte oder online unter www.bad-berleburg.de/gruenabfaelle\\n\\nNchster Abholtermin ist am: 14.04.2021"
+        },
+        {
+          "categories": " Abfallkalender",
+          "location": " Aue - Alle Straen",
+          "summary": "Sperrige Grnabflle: Aue",
+          "uid": "b27082e58bbafbe1bb723993e4991469",
+          "class": "PUBLIC",
+          "dtstart": ["20210414", { "value": "DATE" }],
+          "dtstamp": "20201217T000000Z",
+          "description": "Sperrige Grnabflle - Alle Straen\\n \\nBemerkung: Nur mit angemeldeter Biotonne! Abfuhr muss gesondert beantragt werden. Anmeldetermine: 29.03. - 03.04. ber Anforderungskarte oder online unter www.bad-berleburg.de/gruenabfaelle\\n\\nNchster Abholtermin ist am: 15.04.2021"
+        },
+        {
+          "categories": " Abfallkalender",
+          "location": " Aue - Alle Straen",
+          "summary": "Sperrige Grnabflle: Aue",
+          "uid": "e557f1591a9da935675acd5bfe119164",
+          "class": "PUBLIC",
+          "dtstart": ["20210415", { "value": "DATE" }],
+          "dtstamp": "20201217T000000Z",
+          "description": "Sperrige Grnabflle - Alle Straen\\n \\nBemerkung: Nur mit angemeldeter Biotonne! Abfuhr muss gesondert beantragt werden. Anmeldetermine: 29.03. - 03.04. ber Anforderungskarte oder online unter www.bad-berleburg.de/gruenabfaelle\\n\\nNchster Abholtermin ist am: 16.04.2021"
+        },
+        {
+          "categories": " Abfallkalender",
+          "location": " Aue - Alle Straen",
+          "summary": "Sperrige Grnabflle: Aue",
+          "uid": "a948daefb23cbdcd8282aa17ce6f8f8b",
+          "class": "PUBLIC",
+          "dtstart": ["20210416", { "value": "DATE" }],
+          "dtstamp": "20201217T000000Z",
+          "description": "Sperrige Grnabflle - Alle Straen\\n \\nBemerkung: Nur mit angemeldeter Biotonne! Abfuhr muss gesondert beantragt werden. Anmeldetermine: 29.03. - 03.04. ber Anforderungskarte oder online unter www.bad-berleburg.de/gruenabfaelle\\n\\n"
+        }
+      ]
+    }
+  ],
+  "success": true
+}
