@@ -5,7 +5,7 @@ import colors from "../../lib/colors";
 /**
  * Backend related Code
  */
-const getTimestamp = (weirdDate: string) =>
+const getTimestamp = (weirdDate: string): number =>
   new Date(
     weirdDate.substring(0, 4) +
       "-" +
@@ -15,11 +15,8 @@ const getTimestamp = (weirdDate: string) =>
   ).getTime();
 
 const DATA: Item[] = data.vcalendar[0].vevent
-  .sort(
-    (a, b) =>
-      getTimestamp(a.dtstart[0] as string) -
-      getTimestamp(b.dtstart[0] as string)
-  )
+  .map((v) => ({ ...v, dtstart: getTimestamp(v.dtstart[0] as string) }))
+  .sort((a, b) => a.dtstart - b.dtstart)
   .map((v) => {
     if (v.summary.toLowerCase().includes("bio")) {
       return { ...v, kind: "green" };
@@ -40,29 +37,32 @@ const DATA: Item[] = data.vcalendar[0].vevent
  * End of backend
  */
 
+interface DtstartValue {
+  value: string;
+}
 interface Item {
   categories: string;
   location: string;
   summary: string;
   uid: string;
   class: string;
-  dtstart: (
-    | string
-    | {
-        value: string;
-      }
-  )[];
+  dtstart: number;
   dtstamp: string;
   description: string;
   kind: "blue" | "yellow" | "green" | "black" | undefined;
 }
 
-const RenderItem: ListRenderItem<Item> = ({ item }) => (
-  <View style={setItemStyles({ kind: item.kind }).item}>
-    <Text>{item.summary}</Text>
-    <Text>{item.dtstart[0]}</Text>
-  </View>
-);
+const RenderItem: ListRenderItem<Item> = ({ item }) => {
+  const date = new Date(item.dtstart);
+  return (
+    <View style={setItemStyles({ kind: item.kind }).item}>
+      <Text>{item.summary}</Text>
+      <Text>{`${date.getDate()}.${
+        date.getMonth() + 1
+      }.${date.getFullYear()}`}</Text>
+    </View>
+  );
+};
 
 export const Main: React.FC = () => {
   return (
@@ -90,8 +90,9 @@ const setItemStyles = ({ kind }: Pick<Item, "kind">) => {
   return StyleSheet.create({
     item: {
       flex: 1,
+      flexDirection: "row",
       backgroundColor: itemColor,
-      justifyContent: "center",
+      justifyContent: "space-between",
       paddingHorizontal: 6,
       paddingVertical: 8,
       marginHorizontal: 6,
