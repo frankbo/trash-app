@@ -2,6 +2,7 @@ import React from "react";
 import { FlatList, ListRenderItem, StyleSheet, Text, View } from "react-native";
 import data from "../../../mocks/example-calendar.json";
 import colors from "../../lib/colors";
+import Icon from "react-native-vector-icons/FontAwesome";
 /**
  * Backend related Code
  */
@@ -37,9 +38,6 @@ const DATA: Item[] = data.vcalendar[0].vevent
  * End of backend
  */
 
-interface DtstartValue {
-  value: string;
-}
 interface Item {
   categories: string;
   location: string;
@@ -56,7 +54,10 @@ const RenderItem: ListRenderItem<Item> = ({ item }) => {
   const date = new Date(item.dtstart);
   return (
     <View style={setItemStyles({ kind: item.kind }).item}>
-      <Text>{item.summary}</Text>
+      <Text>
+        <Icon name="trash" size={30} color="black" />
+        <Text>{item.summary}</Text>
+      </Text>
       <Text>{`${date.getDate()}.${
         date.getMonth() + 1
       }.${date.getFullYear()}`}</Text>
