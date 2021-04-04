@@ -5,6 +5,7 @@ import { Button } from "react-native";
 import "react-native-gesture-handler";
 import { Main } from "./src/Views/Main";
 import { Profile } from "./src/Views/Profile";
+import Icon from "react-native-vector-icons/FontAwesome";
 
 export type StackParamList = {
   Main: undefined;
@@ -29,7 +30,13 @@ export default function App() {
             title: "Trash App",
             headerTitleAlign: "center",
             headerRight: () => (
-              <Button onPress={() => navigation.push("Profile")} title="test" />
+              <Icon.Button
+                name="cog"
+                onPress={() => navigation.push("Profile")}
+                color="black"
+                backgroundColor="none"
+                size={32}
+              />
             ),
           })}
         />
