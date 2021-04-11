@@ -20,7 +20,7 @@ const DATA: Item[] = data.vcalendar[0].vevent
   .sort((a, b) => a.dtstart - b.dtstart)
   .map((v) => {
     if (v.summary.toLowerCase().includes("bio")) {
-      return { ...v, kind: "green" };
+      return { ...v, kind: "brown" };
     }
     if (v.summary.toLowerCase().includes("papier")) {
       return { ...v, kind: "blue" };
@@ -30,6 +30,9 @@ const DATA: Item[] = data.vcalendar[0].vevent
     }
     if (v.summary.toLowerCase().includes("rest")) {
       return { ...v, kind: "black" };
+    }
+    if (v.summary.toLowerCase().includes("sperrige")) {
+      return { ...v, kind: "green" };
     }
     return { ...v, kind: undefined };
   });
@@ -47,7 +50,7 @@ interface Item {
   dtstart: number;
   dtstamp: string;
   description: string;
-  kind: "blue" | "yellow" | "green" | "black" | undefined;
+  kind: "blue" | "yellow" | "green" | "black" | "brown" | undefined;
 }
 
 const RenderItem: ListRenderItem<Item> = ({ item }) => {
@@ -87,6 +90,8 @@ const setItemStyles = ({ kind }: Pick<Item, "kind">) => {
       ? colors.green
       : kind === "black"
       ? colors.black
+      : kind === "brown"
+      ? colors.brown
       : "white";
   return StyleSheet.create({
     item: {

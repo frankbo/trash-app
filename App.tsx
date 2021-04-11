@@ -6,18 +6,7 @@ import { Main } from "./src/Views/Main";
 import { Profile } from "./src/Views/Profile";
 import { Location } from "./src/Views/Location";
 import Icon from "react-native-vector-icons/FontAwesome";
-
-export type StackParamList = {
-  Main: undefined;
-  Profile: undefined;
-  Location: undefined;
-};
-
-export enum AppScreens {
-  Main = "Main",
-  Profile = "Profile",
-  Location = "Location",
-}
+import { AppScreens, StackParamList } from "./src/lib/app";
 
 const Stack = createStackNavigator<StackParamList>();
 
