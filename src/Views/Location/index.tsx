@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { Button, View, Text } from "react-native";
 import { AppScreens, StackParamList } from "../../lib/app";
 import { Picker } from "@react-native-picker/picker";
+import { useAppState } from "../../AppContext";
 
 type ProfileScreenNavigationProp = StackNavigationProp<
   StackParamList,
@@ -64,17 +65,15 @@ const badBerleburgStreet = [
   { id: "1746.33.1", name: "westlich der B480" },
 ];
 
-interface ILocation {
+export interface ILocation {
   cityId: string;
   streetId: string;
 }
 
 export const Location: React.FC<Props> = ({ navigation }) => {
   const [isDisabled, setDisabled] = useState(true);
-  const [location, setLocation] = useState<ILocation>({
-    cityId: "",
-    streetId: "",
-  });
+  const { state, dispatch } = useAppState();
+  const { location } = state;
 
   return (
     <View>
@@ -82,9 +81,12 @@ export const Location: React.FC<Props> = ({ navigation }) => {
       <Picker
         style={{ height: 50, width: 300 }}
         selectedValue={location.cityId}
-        onValueChange={(itemValue) => {
-          setLocation({ cityId: itemValue, streetId: "" });
-          setDisabled(itemValue === badBerleburgId);
+        onValueChange={(cityId) => {
+          dispatch({
+            type: "update",
+            payload: { location: { cityId, streetId: "" } },
+          });
+          setDisabled(cityId === badBerleburgId || cityId === "");
         }}
       >
         {cities.map((v, idx) => {
@@ -95,9 +97,12 @@ export const Location: React.FC<Props> = ({ navigation }) => {
         <Picker
           style={{ height: 50, width: 300 }}
           selectedValue={location.streetId}
-          onValueChange={(itemValue) => {
-            setLocation((s) => ({ ...s, streetId: itemValue }));
-            setDisabled(itemValue === "");
+          onValueChange={(streetId) => {
+            dispatch({
+              type: "update",
+              payload: { location: { cityId: badBerleburgId, streetId } },
+            });
+            setDisabled(streetId === "");
           }}
         >
           {badBerleburgStreet.map((v, idx) => {
