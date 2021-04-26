@@ -4,14 +4,7 @@ import colors from "../../lib/colors";
 import Icon from "react-native-vector-icons/FontAwesome";
 import { useQuery } from "react-query";
 import transformEvent from "../../lib/transformCalendarEvent";
-/**
- * Backend related Code
- */
-
-/**
- * End of backend
- */
-
+import { useAppState } from "../../AppContext";
 export interface Item {
   categories: string;
   location: string;
@@ -41,10 +34,14 @@ const RenderItem: ListRenderItem<Item> = ({ item }) => {
 };
 
 export const Main: React.FC = () => {
+  const context = useAppState();
+  const { cityId, streetId } = context.state.location;
+  const baseUrL = "https://www.bad-berleburg.de/output/abfall_export.php";
+  const url = `${baseUrL}?csv_export=1&mode=vcal&ort=${cityId}&strasse=${
+    streetId ? streetId : cityId
+  }&1vJ=2021`; // Parameter vMo (von Monat) and bMo (bis Monat) might be helpful here at some point
   const query = useQuery<Item[], Error>("calData", () =>
-    fetch(
-      "https://www.bad-berleburg.de/output/abfall_export.php?csv_export=1&mode=vcal&ort=1746.21&strasse=1746.21.1&abfart%5B0%5D=1.2&abfart%5B1%5D=1746.1&abfart%5B2%5D=1.6&abfart%5B3%5D=1.1&abfart%5B4%5D=1.5&abfart%5B5%5D=1.4&vtyp=4&vMo=1&vJ=2021&bMo=12"
-    )
+    fetch(url)
       .then((res) => res.text())
       .then((txt) => transformEvent(txt))
   );
