@@ -1,47 +1,18 @@
 import React from "react";
 import { FlatList, ListRenderItem, StyleSheet, Text, View } from "react-native";
-import data from "../../../mocks/example-calendar.json";
 import colors from "../../lib/colors";
 import Icon from "react-native-vector-icons/FontAwesome";
+import { useQuery } from "react-query";
+import transformEvent from "../../lib/transformCalendarEvent";
 /**
  * Backend related Code
  */
-const getTimestamp = (weirdDate: string): number =>
-  new Date(
-    weirdDate.substring(0, 4) +
-      "-" +
-      weirdDate.substring(4, 6) +
-      "-" +
-      weirdDate.substr(6, weirdDate.length)
-  ).getTime();
-
-const DATA: Item[] = data.vcalendar[0].vevent
-  .map((v) => ({ ...v, dtstart: getTimestamp(v.dtstart[0] as string) }))
-  .sort((a, b) => a.dtstart - b.dtstart)
-  .map((v) => {
-    if (v.summary.toLowerCase().includes("bio")) {
-      return { ...v, kind: "brown" };
-    }
-    if (v.summary.toLowerCase().includes("papier")) {
-      return { ...v, kind: "blue" };
-    }
-    if (v.summary.toLowerCase().includes("gelbe")) {
-      return { ...v, kind: "yellow" };
-    }
-    if (v.summary.toLowerCase().includes("rest")) {
-      return { ...v, kind: "black" };
-    }
-    if (v.summary.toLowerCase().includes("sperrige")) {
-      return { ...v, kind: "green" };
-    }
-    return { ...v, kind: undefined };
-  });
 
 /**
  * End of backend
  */
 
-interface Item {
+export interface Item {
   categories: string;
   location: string;
   summary: string;
@@ -55,6 +26,7 @@ interface Item {
 
 const RenderItem: ListRenderItem<Item> = ({ item }) => {
   const date = new Date(item.dtstart);
+
   return (
     <View style={setItemStyles({ kind: item.kind }).item}>
       <Text>
@@ -69,10 +41,27 @@ const RenderItem: ListRenderItem<Item> = ({ item }) => {
 };
 
 export const Main: React.FC = () => {
+  const query = useQuery<Item[], Error>("calData", () =>
+    fetch(
+      "https://www.bad-berleburg.de/output/abfall_export.php?csv_export=1&mode=vcal&ort=1746.21&strasse=1746.21.1&abfart%5B0%5D=1.2&abfart%5B1%5D=1746.1&abfart%5B2%5D=1.6&abfart%5B3%5D=1.1&abfart%5B4%5D=1.5&abfart%5B5%5D=1.4&vtyp=4&vMo=1&vJ=2021&bMo=12"
+    )
+      .then((res) => res.text())
+      .then((txt) => transformEvent(txt))
+  );
+
+  if (query.isLoading) return <Text>"Loading..."</Text>;
+
+  if (query.error) {
+    console.log("An error has occurred: " + query.error);
+    return null;
+  }
+
+  if (!query.data) return null;
+
   return (
     <View style={styles.container}>
       <FlatList
-        data={DATA}
+        data={query.data}
         renderItem={RenderItem}
         keyExtractor={(item) => item.uid}
       />
