@@ -12,6 +12,7 @@ import { QueryClient, QueryClientProvider } from "react-query";
 
 const Stack = createStackNavigator<StackParamList>();
 const queryClient = new QueryClient();
+const title = "Müll App";
 
 export default function App() {
   return (
@@ -21,22 +22,23 @@ export default function App() {
           <Stack.Navigator initialRouteName={AppScreens.Location}>
             <Stack.Screen
               name={AppScreens.Location}
-              options={{ title: "Müll App", headerTitleAlign: "center" }}
+              options={{ title, headerTitleAlign: "center" }}
               component={Location}
             />
             <Stack.Screen
               name={AppScreens.Main}
               component={Main}
               options={({ navigation }) => ({
-                title: "Müll App",
+                title,
                 headerTitleAlign: "center",
                 headerRight: () => (
                   <Icon.Button
                     name="cog"
                     onPress={() => navigation.push(AppScreens.Profile)}
                     color="black"
-                    backgroundColor="none"
-                    size={32}
+                    backgroundColor="transparent"
+                    underlayColor="transparent"
+                    size={24}
                   />
                 ),
               })}
@@ -44,7 +46,7 @@ export default function App() {
             <Stack.Screen
               name={AppScreens.Profile}
               component={Profile}
-              options={{ title: "Trash App", headerTitleAlign: "center" }}
+              options={{ title, headerTitleAlign: "center" }}
             />
           </Stack.Navigator>
         </NavigationContainer>
