@@ -1,9 +1,10 @@
 import { StackNavigationProp } from "@react-navigation/stack";
 import React, { useState } from "react";
-import { Button, View, Text } from "react-native";
+import { Button, View, Text, StyleSheet } from "react-native";
 import { AppScreens, StackParamList } from "../../lib/app";
 import { Picker } from "@react-native-picker/picker";
 import { useAppState } from "../../AppContext";
+import { fontSizes } from "../../lib/font";
 
 type ProfileScreenNavigationProp = StackNavigationProp<
   StackParamList,
@@ -44,7 +45,7 @@ const cities = [
 ];
 
 const badBerleburgStreet = [
-  { id: "", name: "-bitte wählen-" },
+  { id: "", name: "Bitte wählen" },
   { id: "1746.42.1", name: "am breitenbach" },
   { id: "1746.39.1", name: "Am Gehre" },
   { id: "1746.46.1", name: "Am Seifchen" },
@@ -76,10 +77,10 @@ export const Location: React.FC<Props> = ({ navigation }) => {
   const { location } = state;
 
   return (
-    <View>
-      <Text>Wo wohnst du?</Text>
+    <View style={styles.container}>
+      <Text style={styles.headline}>Wähle Deinen Standort</Text>
       <Picker
-        style={{ height: 50, width: 300 }}
+        style={styles.picker}
         selectedValue={location.cityId}
         onValueChange={(cityId) => {
           dispatch({
@@ -95,7 +96,7 @@ export const Location: React.FC<Props> = ({ navigation }) => {
       </Picker>
       {location.cityId === badBerleburgId && (
         <Picker
-          style={{ height: 50, width: 300 }}
+          style={styles.picker}
           selectedValue={location.streetId}
           onValueChange={(streetId) => {
             dispatch({
@@ -110,11 +111,42 @@ export const Location: React.FC<Props> = ({ navigation }) => {
           })}
         </Picker>
       )}
-      <Button
-        disabled={isDisabled}
-        onPress={() => navigation.replace(AppScreens.Main)}
-        title="Weiter"
-      />
+      <View style={styles.button}>
+        <Button
+          disabled={isDisabled}
+          onPress={() => navigation.replace(AppScreens.Main)}
+          title="Weiter"
+        />
+      </View>
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  picker: {
+    fontSize: 20,
+    color: "grey",
+    height: 50,
+    marginVertical: 8,
+    marginHorizontal: 8,
+  },
+  headline: {
+    paddingVertical: 16,
+    paddingHorizontal: 16,
+    fontSize: fontSizes.m,
+    color: "grey",
+    borderBottomWidth: 1,
+    borderStyle: "solid",
+    borderBottomColor: "lightgrey",
+  },
+  button: {
+    marginVertical: 8,
+    marginHorizontal: 16,
+    borderRadius: 30,
+    overflow: "hidden",
+  },
+  container: {
+    flex: 1,
+    alignItems: "stretch",
+  },
+});
