@@ -1,10 +1,10 @@
 import React from "react";
 import { FlatList, ListRenderItem, StyleSheet, Text, View } from "react-native";
 import colors from "../../lib/colors";
-import Icon from "react-native-vector-icons/FontAwesome";
 import { useQuery } from "react-query";
 import transformEvent from "../../lib/transformCalendarEvent";
 import { useAppState } from "../../AppContext";
+import { Delimiter } from "./Delimiter";
 export interface Item {
   categories: string;
   location: string;
@@ -17,18 +17,24 @@ export interface Item {
   kind: "blue" | "yellow" | "green" | "black" | "brown" | undefined;
 }
 
+let prevDate = null;
+const renderDelimiter = (date: Date) => {
+  const element =
+    prevDate?.getTime() !== date.getTime() ? <Delimiter date={date} /> : null;
+  prevDate = date;
+  return element;
+};
+
 const RenderItem: ListRenderItem<Item> = ({ item }) => {
   const date = new Date(item.dtstart);
 
   return (
-    <View style={setItemStyles({ kind: item.kind }).item}>
-      <Text>
-        <Icon name="trash" size={30} color="black" />
-        <Text>{item.summary}</Text>
-      </Text>
-      <Text>{`${date.getDate()}.${
-        date.getMonth() + 1
-      }.${date.getFullYear()}`}</Text>
+    <View>
+      {renderDelimiter(date)}
+      <View style={styles.item}>
+        <View style={setItemStyles({ kind: item.kind }).icon} />
+        <Text style={styles.itemText}>{item.summary}</Text>
+      </View>
     </View>
   );
 };
@@ -49,16 +55,20 @@ export const Main: React.FC = () => {
   if (query.isLoading) return <Text>"Loading..."</Text>;
 
   if (query.error) {
-    console.log("An error has occurred: " + query.error);
-    return null;
+    console.log("An error has occurred while querying: " + query.error);
+    return <Text>"An Error occured"</Text>;
   }
 
   if (!query.data) return null;
 
+  const futureEvents = query.data.filter(
+    (v) => v.dtstart >= new Date(new Date().setHours(0, 0, 0, 0)).getTime()
+  );
+
   return (
     <View style={styles.container}>
       <FlatList
-        data={query.data}
+        data={futureEvents}
         renderItem={RenderItem}
         keyExtractor={(item) => item.uid}
       />
@@ -80,24 +90,30 @@ const setItemStyles = ({ kind }: Pick<Item, "kind">) => {
       ? colors.brown
       : "white";
   return StyleSheet.create({
-    item: {
-      flex: 1,
-      flexDirection: "row",
+    icon: {
+      height: 30,
+      width: 30,
       backgroundColor: itemColor,
-      justifyContent: "space-between",
-      paddingHorizontal: 6,
-      paddingVertical: 8,
-      marginHorizontal: 6,
-      marginVertical: 4,
       borderRadius: 4,
     },
   });
 };
 
 const styles = StyleSheet.create({
+  item: {
+    flex: 1,
+    flexDirection: "row",
+    alignItems: "center",
+    paddingHorizontal: 16,
+    paddingVertical: 16,
+  },
+  itemText: {
+    fontSize: 20,
+    marginLeft: 16,
+    color: "grey",
+  },
   container: {
     flex: 1,
-    backgroundColor: "#fff",
     alignItems: "stretch",
     justifyContent: "center",
   },

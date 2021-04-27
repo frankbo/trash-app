@@ -21,14 +21,14 @@ export default function App() {
           <Stack.Navigator initialRouteName={AppScreens.Location}>
             <Stack.Screen
               name={AppScreens.Location}
-              options={{ title: "Trash App", headerTitleAlign: "center" }}
+              options={{ title: "Müll App", headerTitleAlign: "center" }}
               component={Location}
             />
             <Stack.Screen
               name={AppScreens.Main}
               component={Main}
               options={({ navigation }) => ({
-                title: "Trash App",
+                title: "Müll App",
                 headerTitleAlign: "center",
                 headerRight: () => (
                   <Icon.Button

@@ -1,24 +1,15 @@
 import { parseString } from "cal-parser";
 import { Item } from "../Views/Main";
 
-const getTimestamp = (weirdDate: string | undefined): number => {
-  try {
-    return new Date(weirdDate).getTime();
-  } catch (error) {
-    console.log("Not a valid time", weirdDate);
-    console.log("Error", error);
-  }
-};
-
 const normalizeEvents = (events: any) => {
   return events.map((event) => {
     return {
       categories: event.categories.value,
       location: event.location.value,
-      summary: event.summary.value,
+      summary: event.summary.value.split(":")[0],
       uid: event.uid.value,
       class: event.class.value,
-      dtstart: getTimestamp(event.dtstart.value),
+      dtstart: new Date(event.dtstart.value),
       dtstamp: event.dtstamp.value,
       description: event.description.value,
     };
