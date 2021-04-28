@@ -11,7 +11,7 @@ import { QueryClient, QueryClientProvider } from "react-query";
 
 const Stack = createStackNavigator<StackParamList>();
 const queryClient = new QueryClient();
-const title = "Müll App";
+const title = "Abfall App";
 
 export default function App() {
   return (
