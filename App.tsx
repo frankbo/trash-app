@@ -1,7 +1,6 @@
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import React from "react";
-import "react-native-gesture-handler";
 import { Main } from "./src/Views/Main";
 import { Profile } from "./src/Views/Profile";
 import { Location } from "./src/Views/Location";
