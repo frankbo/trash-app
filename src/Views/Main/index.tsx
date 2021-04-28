@@ -4,7 +4,7 @@ import colors from "../../lib/colors";
 import { useQuery } from "react-query";
 import transformEvent from "../../lib/transformCalendarEvent";
 import { useAppState } from "../../AppContext";
-import { Delimiter } from "./Delimiter";
+import { Delimiter } from "../../components/Delimiter";
 export interface Item {
   categories: string;
   location: string;

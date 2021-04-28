@@ -1,10 +1,20 @@
-import React from "react";
-import { StyleSheet, Text, View } from "react-native";
+import React, { useLayoutEffect, useState } from "react";
+import { StyleSheet, View } from "react-native";
+import { CityAndStreetPicker } from "../../components/CityAndStreetPicker";
+import { Headline } from "../../components/Headline";
 
-export const Profile = () => {
+export const Profile = ({ navigation }) => {
+  const [isDisabled, setDisabled] = useState(true);
+  useLayoutEffect(() => {
+    navigation.setOptions({ isDisabled });
+  }, [navigation, isDisabled]);
+
   return (
     <View style={styles.container}>
-      <Text>This is the Profile page</Text>
+      <View style={styles.container}>
+        <Headline>Ändere Deinen Standort</Headline>
+        <CityAndStreetPicker setDisabled={setDisabled} />
+      </View>
     </View>
   );
 };
@@ -12,8 +22,6 @@ export const Profile = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
+    alignItems: "stretch",
   },
 });
