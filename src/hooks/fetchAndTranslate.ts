@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useAppState } from "../components/AppContext";
+import { setAppConfig } from "../lib/localStorage";
 import transformEvent from "../lib/transformCalendarEvent";
 import { Item } from "../Views/Main";
 
@@ -20,7 +21,8 @@ export const fetchAndTranslate = () => {
   useEffect(() => {
     fetch(url)
       .then((res) => res.text())
-      .then((txt) => setItems(transformEvent(txt)));
+      .then((txt) => setItems(transformEvent(txt)))
+      .then(() => setAppConfig(state));
   }, [url]);
 
   return items;

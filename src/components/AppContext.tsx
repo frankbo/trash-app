@@ -7,7 +7,7 @@ interface ITrash {
   isChecked: boolean;
 }
 
-interface AppState {
+export interface AppState {
   location: ILocation;
   notificationTime: number;
   selectedTrash: ITrash[];

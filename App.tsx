@@ -7,6 +7,7 @@ import { Location } from "./src/Views/Location";
 import Icon from "react-native-vector-icons/FontAwesome";
 import { AppProvider } from "./src/components/AppContext";
 import { QueryClient, QueryClientProvider } from "react-query";
+import { localStorageToContext } from "./src/hooks/appConfig";
 
 export type RootStackParamList = {
   Main: undefined;
@@ -24,41 +25,52 @@ const Stack = createStackNavigator<RootStackParamList>();
 const queryClient = new QueryClient();
 const title = "Abfall App";
 
+const Navigator: React.FC = () => {
+  const state = localStorageToContext(); // TODO set loading state for the beginning to avoid screen jumping
+
+  return (
+    <Stack.Navigator>
+      {state.location.cityId === "" ? (
+        <Stack.Screen
+          name={AppScreens.Location}
+          options={{ title, headerTitleAlign: "center" }}
+          component={Location}
+        />
+      ) : (
+        <Stack.Screen
+          name={AppScreens.Main}
+          component={Main}
+          options={({ navigation }) => ({
+            title,
+            headerTitleAlign: "center",
+            headerRight: () => (
+              <Icon.Button
+                name="cog"
+                onPress={() => navigation.push(AppScreens.Profile)}
+                color="black"
+                backgroundColor="transparent"
+                underlayColor="transparent"
+                size={24}
+              />
+            ),
+          })}
+        />
+      )}
+      <Stack.Screen
+        name={AppScreens.Profile}
+        component={Profile}
+        options={{ title, headerTitleAlign: "center" }}
+      />
+    </Stack.Navigator>
+  );
+};
+
 export default function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <AppProvider>
         <NavigationContainer>
-          <Stack.Navigator initialRouteName={AppScreens.Location}>
-            <Stack.Screen
-              name={AppScreens.Location}
-              options={{ title, headerTitleAlign: "center" }}
-              component={Location}
-            />
-            <Stack.Screen
-              name={AppScreens.Main}
-              component={Main}
-              options={({ navigation }) => ({
-                title,
-                headerTitleAlign: "center",
-                headerRight: () => (
-                  <Icon.Button
-                    name="cog"
-                    onPress={() => navigation.push(AppScreens.Profile)}
-                    color="black"
-                    backgroundColor="transparent"
-                    underlayColor="transparent"
-                    size={24}
-                  />
-                ),
-              })}
-            />
-            <Stack.Screen
-              name={AppScreens.Profile}
-              component={Profile}
-              options={{ title, headerTitleAlign: "center" }}
-            />
-          </Stack.Navigator>
+          <Navigator />
         </NavigationContainer>
       </AppProvider>
     </QueryClientProvider>
