@@ -1,19 +1,16 @@
 import * as React from "react";
 import { ILocation } from "../Views/Location";
-import { Item } from "../Views/Main";
 
-interface ISelectedTrash {
-  blue: boolean;
-  yellow: boolean;
-  black: boolean;
-  brown: boolean;
-  green: boolean;
+interface ITrash {
+  id: string;
+  value: string;
+  isChecked: boolean;
 }
 
 interface AppState {
   location: ILocation;
   notificationTime: number;
-  selectedTrash: ISelectedTrash;
+  selectedTrash: ITrash[];
 }
 
 interface IAction {
@@ -29,13 +26,14 @@ const initialAppState: AppState = {
     streetId: "",
   },
   notificationTime: 3600, // TODO provide useful default state in ms
-  selectedTrash: {
-    blue: true,
-    yellow: true,
-    black: true,
-    brown: true,
-    green: true,
-  },
+  selectedTrash: [
+    { id: "1.6", value: "Papiermüll", isChecked: true },
+    { id: "1746.1", value: "Gelbe Tonne", isChecked: true },
+    { id: "1.1", value: "Restmüll", isChecked: true },
+    { id: "1.4", value: "Sperrige Grünabfälle", isChecked: true },
+    { id: "1.2", value: "Biomüll", isChecked: true },
+    { id: "1.5", value: "Schadstoffsammlung", isChecked: true },
+  ],
 };
 
 const AppContext = React.createContext<
