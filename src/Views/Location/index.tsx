@@ -1,12 +1,12 @@
 import { StackNavigationProp } from "@react-navigation/stack";
 import React, { useState } from "react";
 import { Button, View, Text, StyleSheet } from "react-native";
-import { AppScreens, StackParamList } from "../../lib/app";
 import { Headline } from "../../components/Headline";
 import { CityAndStreetPicker } from "../../components/CityAndStreetPicker";
+import { AppScreens, RootStackParamList } from "../../../App";
 
 type ProfileScreenNavigationProp = StackNavigationProp<
-  StackParamList,
+  RootStackParamList,
   AppScreens.Location
 >;
 

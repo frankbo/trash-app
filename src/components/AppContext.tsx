@@ -1,5 +1,6 @@
 import * as React from "react";
-import { ILocation } from "./Views/Location";
+import { ILocation } from "../Views/Location";
+import { Item } from "../Views/Main";
 
 interface ISelectedTrash {
   blue: boolean;
@@ -22,7 +23,7 @@ interface IAction {
 
 type Dispatch = (action: IAction) => void;
 
-const initialAppState = {
+const initialAppState: AppState = {
   location: {
     cityId: "",
     streetId: "",

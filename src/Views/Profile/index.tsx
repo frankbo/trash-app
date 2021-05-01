@@ -1,20 +1,15 @@
-import React, { useLayoutEffect, useState } from "react";
+import React, { useState } from "react";
 import { StyleSheet, View } from "react-native";
 import { CityAndStreetPicker } from "../../components/CityAndStreetPicker";
 import { Headline } from "../../components/Headline";
 
-export const Profile = ({ navigation }) => {
+export const Profile: React.FC = () => {
   const [isDisabled, setDisabled] = useState(true);
-  useLayoutEffect(() => {
-    navigation.setOptions({ isDisabled });
-  }, [navigation, isDisabled]);
 
   return (
     <View style={styles.container}>
-      <View style={styles.container}>
-        <Headline>Ändere Deinen Standort</Headline>
-        <CityAndStreetPicker setDisabled={setDisabled} />
-      </View>
+      <Headline>Ändere deinen Standort</Headline>
+      <CityAndStreetPicker setDisabled={setDisabled} />
     </View>
   );
 };

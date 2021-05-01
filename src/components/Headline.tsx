@@ -5,7 +5,6 @@ import { StyleSheet, Text, View } from "react-native";
 const styles = StyleSheet.create({
   text: {
     color: "grey",
-    flex: 1,
     paddingHorizontal: 16,
     paddingVertical: 16,
     justifyContent: "center",
@@ -17,9 +16,5 @@ const styles = StyleSheet.create({
 });
 
 export const Headline: React.FC = ({ children }) => {
-  return (
-    <View>
-      <Text style={styles.text}>{children}</Text>
-    </View>
-  );
+  return <Text style={styles.text}>{children}</Text>;
 };

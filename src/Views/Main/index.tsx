@@ -1,10 +1,9 @@
 import React from "react";
 import { FlatList, ListRenderItem, StyleSheet, Text, View } from "react-native";
 import colors from "../../lib/colors";
-import { useQuery } from "react-query";
-import transformEvent from "../../lib/transformCalendarEvent";
-import { useAppState } from "../../AppContext";
 import { Delimiter } from "../../components/Delimiter";
+import { fetchAndTranslate } from "../../hooks/fetchAndTranslate";
+import { useAppState } from "../../components/AppContext";
 export interface Item {
   categories: string;
   location: string;
@@ -40,28 +39,11 @@ const RenderItem: ListRenderItem<Item> = ({ item }) => {
 };
 
 export const Main: React.FC = () => {
-  const context = useAppState();
-  const { cityId, streetId } = context.state.location;
-  const baseUrL = "https://www.bad-berleburg.de/output/abfall_export.php";
-  const url = `${baseUrL}?csv_export=1&mode=vcal&ort=${cityId}&strasse=${
-    streetId ? streetId : cityId
-  }&1vJ=2021`; // Parameter vMo (von Monat) and bMo (bis Monat) might be helpful here at some point
-  const query = useQuery<Item[], Error>("calData", () =>
-    fetch(url)
-      .then((res) => res.text())
-      .then((txt) => transformEvent(txt))
-  );
+  const items = fetchAndTranslate();
 
-  if (query.isLoading) return <Text>"Loading..."</Text>;
+  if (items.length < 1) return null;
 
-  if (query.error) {
-    console.log("An error has occurred while querying: " + query.error);
-    return <Text>"An Error occured"</Text>;
-  }
-
-  if (!query.data) return null;
-
-  const futureEvents = query.data.filter(
+  const futureEvents = items.filter(
     (v) => v.dtstart >= new Date(new Date().setHours(0, 0, 0, 0)).getTime()
   );
 

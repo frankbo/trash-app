@@ -1,7 +1,7 @@
 import React from "react";
 import { StyleSheet, View } from "react-native";
 import { Picker } from "@react-native-picker/picker";
-import { useAppState } from "../AppContext";
+import { useAppState } from "./AppContext";
 
 const badBerleburgId = "1746.18";
 const cities = [

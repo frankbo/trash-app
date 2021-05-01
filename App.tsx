@@ -5,11 +5,22 @@ import { Main } from "./src/Views/Main";
 import { Profile } from "./src/Views/Profile";
 import { Location } from "./src/Views/Location";
 import Icon from "react-native-vector-icons/FontAwesome";
-import { AppScreens, StackParamList } from "./src/lib/app";
-import { AppProvider } from "./src/AppContext";
+import { AppProvider } from "./src/components/AppContext";
 import { QueryClient, QueryClientProvider } from "react-query";
 
-const Stack = createStackNavigator<StackParamList>();
+export type RootStackParamList = {
+  Main: undefined;
+  Profile: undefined;
+  Location: undefined;
+};
+
+export enum AppScreens {
+  Main = "Main",
+  Profile = "Profile",
+  Location = "Location",
+}
+
+const Stack = createStackNavigator<RootStackParamList>();
 const queryClient = new QueryClient();
 const title = "Abfall App";
 
