@@ -26,7 +26,7 @@ const queryClient = new QueryClient();
 const title = "Abfall App";
 
 const Navigator: React.FC = () => {
-  const state = localStorageToContext(); // TODO set loading state for the beginning to avoid screen jumping
+  const state = localStorageToContext();
 
   return (
     <Stack.Navigator>
