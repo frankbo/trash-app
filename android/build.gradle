@@ -5,6 +5,7 @@ buildscript {
         // googlePlayServicesVersion = "+" // default: "+"
         // firebaseMessagingVersion = "+" // default: "+"
 
+        firebaseMessagingVersion = "21.1.0" // TODO remove when push works properly
         buildToolsVersion = "29.0.2"
         minSdkVersion = 21
         compileSdkVersion = 29

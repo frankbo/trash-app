@@ -6,8 +6,8 @@ export const localStorageToContext = () => {
   const { state, dispatch } = useAppState();
 
   useEffect(() => {
-    getAppConfig().then((config) =>
-      dispatch({ type: "update", payload: { ...config } })
+    getAppConfig().then(
+      (config) => config && dispatch({ type: "update", payload: { ...config } })
     );
   }, []);
 

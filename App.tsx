@@ -8,18 +8,7 @@ import Icon from "react-native-vector-icons/FontAwesome";
 import { AppProvider } from "./src/components/AppContext";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { localStorageToContext } from "./src/hooks/appConfig";
-
-export type RootStackParamList = {
-  Main: undefined;
-  Profile: undefined;
-  Location: undefined;
-};
-
-export enum AppScreens {
-  Main = "Main",
-  Profile = "Profile",
-  Location = "Location",
-}
+import { AppScreens, RootStackParamList } from "./src/@types/app";
 
 const Stack = createStackNavigator<RootStackParamList>();
 const queryClient = new QueryClient();

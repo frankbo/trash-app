@@ -3,7 +3,6 @@ import { FlatList, ListRenderItem, StyleSheet, Text, View } from "react-native";
 import colors from "../../lib/colors";
 import { Delimiter } from "../../components/Delimiter";
 import { fetchAndTranslate } from "../../hooks/fetchAndTranslate";
-import { useAppState } from "../../components/AppContext";
 export interface Item {
   categories: string;
   location: string;

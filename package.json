@@ -8,7 +8,7 @@
   },
   "dependencies": {
     "@react-native-async-storage/async-storage": "^1.15.4",
-    "@react-native-community/checkbox": "^0.5.7",
+    "@react-native-community/checkbox": "0.5.7",
     "@react-native-community/masked-view": "0.1.10",
     "@react-native-community/push-notification-ios": "^1.8.0",
     "@react-native-picker/picker": "^1.14.0",
@@ -46,6 +46,6 @@
     "typescript": "~4.0.0"
   },
   "private": true,
-  "name": "TrashAppExpo",
+  "name": "trash-app-expo",
   "version": "1.0.0"
 }

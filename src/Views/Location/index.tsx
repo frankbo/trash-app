@@ -1,9 +1,9 @@
 import { StackNavigationProp } from "@react-navigation/stack";
 import React, { useState } from "react";
-import { Button, View, Text, StyleSheet } from "react-native";
+import { Button, View, StyleSheet } from "react-native";
 import { Headline } from "../../components/Headline";
 import { CityAndStreetPicker } from "../../components/CityAndStreetPicker";
-import { AppScreens, RootStackParamList } from "../../../App";
+import { AppScreens, RootStackParamList } from "../../@types/app";
 
 type ProfileScreenNavigationProp = StackNavigationProp<
   RootStackParamList,

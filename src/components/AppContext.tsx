@@ -27,12 +27,12 @@ const initialAppState: AppState = {
   },
   notificationTime: 3600, // TODO provide useful default state in ms
   selectedTrash: [
-    { id: "1.6", value: "Papiermüll", isChecked: true },
-    { id: "1746.1", value: "Gelbe Tonne", isChecked: true },
-    { id: "1.1", value: "Restmüll", isChecked: true },
-    { id: "1.4", value: "Sperrige Grünabfälle", isChecked: true },
     { id: "1.2", value: "Biomüll", isChecked: true },
+    { id: "1746.1", value: "Gelbe Tonne", isChecked: true },
+    { id: "1.6", value: "Papiermüll", isChecked: true },
+    { id: "1.1", value: "Restmüll", isChecked: true },
     { id: "1.5", value: "Schadstoffsammlung", isChecked: true },
+    { id: "1.4", value: "Sperrige Grünabfälle", isChecked: true },
   ],
 };
 
