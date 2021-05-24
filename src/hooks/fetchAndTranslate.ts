@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useAppState } from "../components/AppContext";
-import { setAppConfig } from "../lib/localStorage";
+import { appStateToLocalStorage } from "../lib/localStorage";
 import transformEvent from "../lib/transformCalendarEvent";
 import { Item } from "../Views/Main";
 
@@ -27,8 +27,12 @@ export const fetchAndTranslate = () => {
   useEffect(() => {
     fetch(url)
       .then((res) => res.text())
-      .then((txt) => setItems(transformEvent(txt)))
-      .then(() => setAppConfig(state))
+      .then((txt) => {
+        const items = transformEvent(txt);
+        setItems(items);
+        appStateToLocalStorage({ ...state, items });
+      })
+      .then(() => appStateToLocalStorage(state))
       .catch((e) => {
         console.log("Error couldnt fetch data ", e);
         console.log("The fetched url was ", url);

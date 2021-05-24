@@ -2018,6 +2018,11 @@
   dependencies:
     "@types/react" "*"
 
+"@types/react-native-push-notification@^7.3.0":
+  version "7.3.0"
+  resolved "https://registry.yarnpkg.com/@types/react-native-push-notification/-/react-native-push-notification-7.3.0.tgz#5c998134347c1e8a2ddb28524349acf12cfbb243"
+  integrity sha512-11p6U/6atLJQcuBiwO+QR5NzAWyxowj9yiQ5hcRwfH9lwD06jKyG2nr/b4MUT7HALMF3JUZUn/qZ1gR6DgfnFQ==
+
 "@types/react-native-vector-icons@^6.4.6":
   version "6.4.6"
   resolved "https://registry.yarnpkg.com/@types/react-native-vector-icons/-/react-native-vector-icons-6.4.6.tgz#848e3b14572def56212cafbf5cb1254b445bfb41"
@@ -6744,12 +6749,17 @@ react-native-iphone-x-helper@^1.3.0:
   resolved "https://registry.yarnpkg.com/react-native-iphone-x-helper/-/react-native-iphone-x-helper-1.3.1.tgz#20c603e9a0e765fd6f97396638bdeb0e5a60b010"
   integrity sha512-HOf0jzRnq2/aFUcdCJ9w9JGzN3gdEg0zFE4FyYlp4jtidqU03D5X7ZegGKfT1EWteR0gPBGp9ye5T5FvSWi9Yg==
 
+react-native-midnight@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/react-native-midnight/-/react-native-midnight-1.0.0.tgz#75d50fece7c6b26fa371a9113babd6983f384906"
+  integrity sha512-ua4d8SetG9gsIvkVGOGb4ehQgZ2yUtUKF6vx55ca+SyNA+bOpWSwGIe1Pm8AUCotVwyQIoR7JCNI1DL8QUm89g==
+
 react-native-notifications@^3.4.2:
   version "3.4.2"
   resolved "https://registry.yarnpkg.com/react-native-notifications/-/react-native-notifications-3.4.2.tgz#5742a07eb62f61668df0ab8e1c97d470f3101e58"
   integrity sha512-kJL3fDQu2LaCmz94dpUjWbpXSTwoouHCNpYQgIwNDL4H4lp7h5TNnfoo0owwA0CSz9E1egWz9o3CioM/unZw/w==
 
-react-native-push-notification@^7.2.3:
+react-native-push-notification@^7.3.1:
   version "7.3.1"
   resolved "https://registry.yarnpkg.com/react-native-push-notification/-/react-native-push-notification-7.3.1.tgz#1495feacd25169b998446dcf7b448a197ae5dca0"
   integrity sha512-5kSKPvDU23uZRmzgKTsGhbwGNvB2tidu1VnInBHP53ZD0VEPSBl5fbpuTfHH98ED+Gp1SCcT2/e6bJWkIspKvg==

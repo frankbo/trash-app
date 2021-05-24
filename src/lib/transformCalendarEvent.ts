@@ -10,7 +10,6 @@ const normalizeEvents = (events: any) => {
       uid: event.uid.value,
       class: event.class.value,
       dtstart: new Date(event.dtstart.value),
-      dtstamp: event.dtstamp.value,
       description: event.description.value,
     };
   });

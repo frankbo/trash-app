@@ -10,7 +10,6 @@ export interface Item {
   uid: string;
   class: string;
   dtstart: number;
-  dtstamp: string;
   description: string;
   kind: "blue" | "yellow" | "green" | "black" | "brown" | undefined;
 }

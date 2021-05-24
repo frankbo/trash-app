@@ -1,6 +1,6 @@
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
-import React from "react";
+import React, { useEffect } from "react";
 import { Main } from "./src/Views/Main";
 import { Profile } from "./src/Views/Profile";
 import { Location } from "./src/Views/Location";
@@ -9,6 +9,11 @@ import { AppProvider } from "./src/components/AppContext";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { localStorageToContext } from "./src/hooks/appConfig";
 import { AppScreens, RootStackParamList } from "./src/@types/app";
+import {
+  createDefaultChannel,
+  scheduleNotification,
+} from "./src/lib/notificationHandler";
+import { useOnDayChange } from "react-native-midnight";
 
 const Stack = createStackNavigator<RootStackParamList>();
 const queryClient = new QueryClient();
@@ -16,6 +21,7 @@ const title = "Abfall App";
 
 const Navigator: React.FC = () => {
   const state = localStorageToContext();
+  useOnDayChange(scheduleNotification);
 
   return (
     <Stack.Navigator>
@@ -55,6 +61,10 @@ const Navigator: React.FC = () => {
 };
 
 export default function App() {
+  useEffect(() => {
+    createDefaultChannel();
+  });
+
   return (
     <QueryClientProvider client={queryClient}>
       <AppProvider>

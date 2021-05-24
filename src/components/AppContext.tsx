@@ -1,5 +1,6 @@
 import * as React from "react";
 import { ILocation } from "../Views/Location";
+import { Item } from "../Views/Main";
 
 interface ITrash {
   id: string;
@@ -9,7 +10,8 @@ interface ITrash {
 
 export interface AppState {
   location: ILocation;
-  notificationTime: number;
+  items: Item[];
+  notifyBefore: number;
   selectedTrash: ITrash[];
 }
 
@@ -20,12 +22,14 @@ interface IAction {
 
 type Dispatch = (action: IAction) => void;
 
+const sixteenHours = 57600000;
 const initialAppState: AppState = {
   location: {
     cityId: "",
     streetId: "",
   },
-  notificationTime: 3600, // TODO provide useful default state in ms
+  items: [],
+  notifyBefore: sixteenHours,
   selectedTrash: [
     { id: "1.2", value: "Biomüll", isChecked: true },
     { id: "1746.1", value: "Gelbe Tonne", isChecked: true },
@@ -36,9 +40,10 @@ const initialAppState: AppState = {
   ],
 };
 
-const AppContext = React.createContext<
-  { state: AppState; dispatch: Dispatch } | undefined
->(undefined);
+const AppContext =
+  React.createContext<{ state: AppState; dispatch: Dispatch } | undefined>(
+    undefined
+  );
 
 function appReducer(state: AppState, action: IAction) {
   switch (action.type) {
