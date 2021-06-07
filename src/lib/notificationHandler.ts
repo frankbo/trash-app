@@ -77,7 +77,9 @@ const getTomorrow = (): Date => {
 };
 
 const scheduleNotification = (items: Item[]) => {
-  PushNotification.cancelAllLocalNotifications();
+  if (Platform.OS === "ios") {
+    PushNotification.cancelAllLocalNotifications();
+  }
 
   const tomorrow = getTomorrow();
   const date = new Date(new Date().setHours(12, 0, 0, 0)); // Every day at 12
