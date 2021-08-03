@@ -1,43 +1,48 @@
-import { parseString } from "cal-parser";
+import { ITrash } from "../components/AppContext";
 import { Item } from "../Views/Main";
 
-const normalizeEvents = (events: any) => {
-  return events.map((event) => {
-    return {
-      categories: event.categories.value,
-      location: event.location.value,
-      summary: event.summary.value.split(":")[0],
-      uid: event.uid.value,
-      class: event.class.value,
-      dtstart: new Date(event.dtstart.value),
-      description: event.description.value,
-    };
+const transformEvent = (events: ReadonlyArray<Omit<Item, "kind">>): Item[] => {
+  return events.map((v) => {
+    if (v.summary.toLowerCase().includes("bio")) {
+      return { ...v, kind: "brown" };
+    }
+    if (v.summary.toLowerCase().includes("papier")) {
+      return { ...v, kind: "blue" };
+    }
+    if (v.summary.toLowerCase().includes("gelbe")) {
+      return { ...v, kind: "yellow" };
+    }
+    if (v.summary.toLowerCase().includes("rest")) {
+      return { ...v, kind: "black" };
+    }
+    if (v.summary.toLowerCase().includes("sperrige")) {
+      return { ...v, kind: "green" };
+    }
+    return { ...v, kind: undefined };
   });
 };
 
-const transformEvent = (eventAsString: string): Item[] => {
-  const events = parseString(eventAsString).events;
-  const normaizedEvent = normalizeEvents(events);
-  return normaizedEvent
-    .sort((a, b) => a.dtstart - b.dtstart)
-    .map((v) => {
-      if (v.summary.toLowerCase().includes("bio")) {
-        return { ...v, kind: "brown" };
-      }
-      if (v.summary.toLowerCase().includes("papier")) {
-        return { ...v, kind: "blue" };
-      }
-      if (v.summary.toLowerCase().includes("gelbe")) {
-        return { ...v, kind: "yellow" };
-      }
-      if (v.summary.toLowerCase().includes("rest")) {
-        return { ...v, kind: "black" };
-      }
-      if (v.summary.toLowerCase().includes("sperrige")) {
-        return { ...v, kind: "green" };
-      }
-      return { ...v, kind: undefined };
-    });
+const mapGarbageToItem = (trash: ITrash, item: Item): boolean => {
+  if (!trash.isChecked) {
+    return false;
+  }
+
+  switch (trash.id) {
+    case "1.2":
+      return item.kind == "brown";
+    case "1746.1":
+      return item.kind == "yellow";
+    case "1.6":
+      return item.kind == "blue";
+    case "1.1":
+      return item.kind == "black";
+    case "1.5":
+      return item.kind == "white";
+    case "1.4":
+      return item.kind == "green";
+    default:
+      return false;
+  }
 };
 
-export default transformEvent;
+export { transformEvent, mapGarbageToItem };

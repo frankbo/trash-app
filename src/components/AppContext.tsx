@@ -2,7 +2,7 @@ import * as React from "react";
 import { ILocation } from "../Views/Location";
 import { Item } from "../Views/Main";
 
-interface ITrash {
+export interface ITrash {
   id: string;
   value: string;
   isChecked: boolean;

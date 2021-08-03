@@ -4,17 +4,14 @@ import colors from "../../lib/colors";
 import { Delimiter } from "../../components/Delimiter";
 import { fetchAndTranslate } from "../../hooks/fetchAndTranslate";
 export interface Item {
-  categories: string;
   location: string;
   summary: string;
-  uid: string;
-  class: string;
-  dtstart: number;
+  dateStart: string;
   description: string;
-  kind: "blue" | "yellow" | "green" | "black" | "brown" | undefined;
+  kind: "blue" | "yellow" | "green" | "black" | "brown" | "white" | undefined;
 }
 
-let prevDate = null;
+let prevDate: any = null;
 const renderDelimiter = (date: Date) => {
   const element =
     prevDate?.getTime() !== date.getTime() ? <Delimiter date={date} /> : null;
@@ -23,7 +20,7 @@ const renderDelimiter = (date: Date) => {
 };
 
 const RenderItem: ListRenderItem<Item> = ({ item }) => {
-  const date = new Date(item.dtstart);
+  const date = new Date(item.dateStart);
 
   return (
     <View>
@@ -42,7 +39,9 @@ export const Main: React.FC = () => {
   if (items.length < 1) return null;
 
   const futureEvents = items.filter(
-    (v) => v.dtstart >= new Date(new Date().setHours(0, 0, 0, 0)).getTime()
+    (v) =>
+      new Date(v.dateStart).getTime() >=
+      new Date(new Date().setHours(0, 0, 0, 0)).getTime()
   );
 
   return (
@@ -50,7 +49,7 @@ export const Main: React.FC = () => {
       <FlatList
         data={futureEvents}
         renderItem={RenderItem}
-        keyExtractor={(item) => item.uid}
+        keyExtractor={(item) => item.dateStart + item.kind}
       />
     </View>
   );
