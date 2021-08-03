@@ -1,43 +1,52 @@
 import { useEffect, useState } from "react";
-import { useAppState } from "../components/AppContext";
+import { ITrash, useAppState } from "../components/AppContext";
 import { appStateToLocalStorage } from "../lib/localStorage";
-import transformEvent from "../lib/transformCalendarEvent";
+import {
+  transformEvent,
+  mapGarbageToItem,
+} from "../lib/transformCalendarEvent";
 import { Item } from "../Views/Main";
+
+const filteredItemsByGargabeType = (
+  items: Item[],
+  selectedTrash: ITrash[]
+): Item[] =>
+  items.filter((i) =>
+    selectedTrash.map((t) => mapGarbageToItem(t, i)).includes(true)
+  );
 
 export const fetchAndTranslate = () => {
   const [items, setItems] = useState<Item[]>([]);
   const { state } = useAppState();
+  const { selectedTrash } = state;
   const { cityId, streetId } = state.location;
-  const baseUrL = "https://www.bad-berleburg.de/output/abfall_export.php";
-  const garbageTypes = state.selectedTrash.reduce(
-    (acc, trash) =>
-      trash.isChecked
-        ? {
-            arrIdx: acc.arrIdx + 1,
-            types: acc.types.concat(`&abfart[${acc.arrIdx}]=${trash.id}`),
-          }
-        : acc,
-    { types: "", arrIdx: 0 }
-  );
-
-  const url = `${baseUrL}?csv_export=1&mode=vcal${
-    garbageTypes.types
-  }&ort=${cityId}&strasse=${streetId ? streetId : cityId}&1vJ=2021`; // Parameter vMo (von Monat) and bMo (bis Monat) might be helpful here at some point
+  const baseUrl = "https://w70x9ep0ch.execute-api.eu-central-1.amazonaws.com";
+  const url =
+    baseUrl +
+    `/production/events?locationId=${cityId}&streetId=${
+      streetId ? streetId : cityId
+    }`;
 
   useEffect(() => {
-    fetch(url)
-      .then((res) => res.text())
-      .then((txt) => {
-        const items = transformEvent(txt);
+    fetch(url, {
+      headers: { "x-api-key": "CT5MwfFu2EaN32n7ngNzH3IkLOewauZd7EeV1nJz" },
+    })
+      .then((res) => {
+        return res.json();
+      })
+      .then(({ events }) => {
+        const items = filteredItemsByGargabeType(
+          transformEvent(events),
+          state.selectedTrash
+        );
         setItems(items);
         appStateToLocalStorage({ ...state, items });
       })
-      .then(() => appStateToLocalStorage(state))
       .catch((e) => {
         console.log("Error couldnt fetch data ", e);
         console.log("The fetched url was ", url);
       });
-  }, [url]);
+  }, [url, selectedTrash]);
 
   return items;
 };

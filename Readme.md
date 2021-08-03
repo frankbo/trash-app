@@ -4,7 +4,7 @@
 
 adb -d logcat ReactNativeJS:I '\*:S'
 
-## Run and Buil
+## Run and Built
 
 npx react-native run-android --variant=release
 npx react-native run-android

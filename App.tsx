@@ -9,11 +9,6 @@ import { AppProvider } from "./src/components/AppContext";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { localStorageToContext } from "./src/hooks/appConfig";
 import { AppScreens, RootStackParamList } from "./src/@types/app";
-import {
-  createDefaultChannel,
-  scheduleNotification,
-} from "./src/lib/notificationHandler";
-import { useOnDayChange } from "react-native-midnight";
 
 const Stack = createStackNavigator<RootStackParamList>();
 const queryClient = new QueryClient();
@@ -21,7 +16,6 @@ const title = "Abfall App";
 
 const Navigator: React.FC = () => {
   const state = localStorageToContext();
-  useOnDayChange(scheduleNotification);
 
   return (
     <Stack.Navigator>
@@ -54,17 +48,31 @@ const Navigator: React.FC = () => {
       <Stack.Screen
         name={AppScreens.Profile}
         component={Profile}
-        options={{ title, headerTitleAlign: "center" }}
+        // TODO fix if arrow back is not showing up anymore.
+        // options={({ navigation }) => ({
+        //   title,
+        //   headerTitleAlign: "center",
+        //   headerLeft: (
+        //     <Icon.Button
+        //       name="arrow-left"
+        //       onPress={() => {
+        //         navigation.goBack();
+        //       }}
+        //       color="black"
+        //       backgroundColor="transparent"
+        //       underlayColor="transparent"
+        //       size={24}
+        //     />
+        //   ),
+        // })}
       />
     </Stack.Navigator>
   );
 };
 
+// TODO bring in notifications from react-native-ntotifications and maybe with the midnight library
+// to send them out once per day.
 export default function App() {
-  useEffect(() => {
-    createDefaultChannel();
-  });
-
   return (
     <QueryClientProvider client={queryClient}>
       <AppProvider>
