@@ -9,6 +9,7 @@ export interface ITrash {
 }
 
 export interface AppState {
+  loading: boolean;
   location: ILocation;
   items: Item[];
   notifyBefore: number;
@@ -24,6 +25,7 @@ type Dispatch = (action: IAction) => void;
 
 const sixteenHours = 57600000;
 const initialAppState: AppState = {
+  loading: true,
   location: {
     cityId: "",
     streetId: "",
