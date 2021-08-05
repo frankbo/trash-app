@@ -2,7 +2,7 @@ import { useQuery } from "react-query";
 import { AppState, useAppState } from "../components/AppContext";
 import { localStorageToAppState } from "../lib/localStorage";
 
-export const localStorageToContext = () => {
+export const fetchFromLocalStorage = () => {
   const { dispatch } = useAppState();
 
   return useQuery<AppState, Error>("localStorage", localStorageToAppState, {

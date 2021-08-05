@@ -8,7 +8,7 @@ import { Loading } from "./src/Views/Loading";
 import Icon from "react-native-vector-icons/FontAwesome";
 import { AppProvider, useAppState } from "./src/components/AppContext";
 import { QueryClient, QueryClientProvider } from "react-query";
-import { localStorageToContext } from "./src/hooks/appConfig";
+import { fetchFromLocalStorage } from "./src/hooks/fetchAppState";
 import { AppScreens, RootStackParamList } from "./src/@types/app";
 
 const Stack = createStackNavigator<RootStackParamList>();
@@ -16,7 +16,7 @@ const queryClient = new QueryClient();
 const title = "Abfall App";
 
 const Navigator: React.FC = () => {
-  const { isLoading, isFetching } = localStorageToContext();
+  const { isLoading, isFetching } = fetchFromLocalStorage();
   const { state } = useAppState();
   if (isLoading || isFetching) {
     return <Loading />;
