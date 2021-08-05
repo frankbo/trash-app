@@ -1,12 +1,12 @@
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
-import React, { useEffect } from "react";
+import React from "react";
 import { Main } from "./src/Views/Main";
 import { Profile } from "./src/Views/Profile";
 import { Location } from "./src/Views/Location";
 import { Loading } from "./src/Views/Loading";
 import Icon from "react-native-vector-icons/FontAwesome";
-import { AppProvider } from "./src/components/AppContext";
+import { AppProvider, useAppState } from "./src/components/AppContext";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { localStorageToContext } from "./src/hooks/appConfig";
 import { AppScreens, RootStackParamList } from "./src/@types/app";
@@ -16,61 +16,63 @@ const queryClient = new QueryClient();
 const title = "Abfall App";
 
 const Navigator: React.FC = () => {
-  const state = localStorageToContext();
+  const { isLoading, isFetching } = localStorageToContext();
+  const { state } = useAppState();
+  if (isLoading || isFetching) {
+    return <Loading />;
+  }
+  const initialRoute =
+    state.location.cityId === "" ? AppScreens.Location : AppScreens.Main;
   return (
-    <Stack.Navigator>
-      {state.loading ? (
-        <Stack.Screen
-          name="Loading"
-          options={{ title, headerTitleAlign: "center" }}
-          component={Loading}
-        />
-      ) : state.location.cityId === "" ? (
-        <Stack.Screen
-          name={AppScreens.Location}
-          options={{ title, headerTitleAlign: "center" }}
-          component={Location}
-        />
-      ) : (
-        <Stack.Screen
-          name={AppScreens.Main}
-          component={Main}
-          options={({ navigation }) => ({
-            title,
-            headerTitleAlign: "center",
-            headerRight: () => (
-              <Icon.Button
-                name="cog"
-                onPress={() => navigation.push(AppScreens.Profile)}
-                color="black"
-                backgroundColor="transparent"
-                underlayColor="transparent"
-                size={24}
-              />
-            ),
-          })}
-        />
-      )}
+    <Stack.Navigator initialRouteName={initialRoute}>
+      <Stack.Screen
+        name={AppScreens.Loading}
+        options={{ title, headerTitleAlign: "center" }}
+        component={Loading}
+      />
+      <Stack.Screen
+        name={AppScreens.Location}
+        options={{ title, headerTitleAlign: "center" }}
+        component={Location}
+      />
+      <Stack.Screen
+        name={AppScreens.Main}
+        component={Main}
+        options={({ navigation }) => ({
+          title,
+          headerTitleAlign: "center",
+          headerRight: () => (
+            <Icon.Button
+              name="cog"
+              onPress={() => navigation.push(AppScreens.Profile)}
+              color="black"
+              backgroundColor="transparent"
+              underlayColor="transparent"
+              size={24}
+            />
+          ),
+        })}
+      />
       <Stack.Screen
         name={AppScreens.Profile}
         component={Profile}
-        // TODO fix if arrow back is not showing up anymore.
-        // options={({ navigation }) => ({
-        //   title,
-        //   headerTitleAlign: "center",
-        //   headerLeft: (
-        //     <Icon.Button
-        //       name="arrow-left"
-        //       onPress={() => {
-        //         navigation.goBack();
-        //       }}
-        //       color="black"
-        //       backgroundColor="transparent"
-        //       underlayColor="transparent"
-        //       size={24}
-        //     />
-        //   ),
-        // })}
+        options={({ navigation }) => ({
+          title,
+          headerTitleAlign: "center",
+          // Sometimes headerLeft is not rendered. This is a fix for it.
+          headerLeft: () => (
+            <Icon.Button
+              name="arrow-left"
+              onPress={() => {
+                navigation.goBack();
+              }}
+              color="black"
+              backgroundColor="transparent"
+              underlayColor="transparent"
+              size={24}
+            />
+          ),
+        })}
       />
     </Stack.Navigator>
   );

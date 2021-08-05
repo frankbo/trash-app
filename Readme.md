@@ -2,7 +2,7 @@
 
 ## Logcat
 
-adb -d logcat ReactNativeJS:I '\*:S'
+`adb -d logcat ReactNativeJS:I '\*:S'`
 
 ## Run and Built
 
