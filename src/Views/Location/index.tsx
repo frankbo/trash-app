@@ -29,7 +29,9 @@ export const Location: React.FC<Props> = ({ navigation }) => {
       <View style={styles.button}>
         <Button
           disabled={isDisabled}
-          onPress={() => navigation.replace(AppScreens.Main)}
+          onPress={() => {
+            navigation.replace(AppScreens.Main);
+          }}
           title="Weiter"
         />
       </View>
