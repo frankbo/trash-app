@@ -1,8 +1,6 @@
 import React from "react";
-import { ActivityIndicator, View } from "react-native";
+import { LoadingIndicator } from "../../components/LoadingIndicator";
 
-export const Loading: React.FC = () => (
-  <View>
-    <ActivityIndicator size="large" />
-  </View>
-);
+export const Loading: React.FC = () => 
+  <LoadingIndicator />
+

@@ -3,6 +3,7 @@ import { FlatList, ListRenderItem, StyleSheet, Text, View } from "react-native";
 import colors from "../../lib/colors";
 import { Delimiter } from "../../components/Delimiter";
 import { fetchAndTranslate } from "../../hooks/fetchAndTranslate";
+import { LoadingIndicator } from "../../components/LoadingIndicator";
 export interface Item {
   location: string;
   summary: string;
@@ -34,8 +35,9 @@ const RenderItem: ListRenderItem<Item> = ({ item }) => {
 };
 
 export const Main: React.FC = () => {
-  const { data: items } = fetchAndTranslate();
+  const { data: items, isFetching, isLoading } = fetchAndTranslate();
 
+  if (isFetching || isLoading ) return <LoadingIndicator />;
   if (!items || items.length < 1) return null;
 
   const futureEvents = items.filter(
