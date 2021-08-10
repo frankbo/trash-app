@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useQuery } from "react-query";
 import { ITrash, useAppState } from "../components/AppContext";
 import { appStateToLocalStorage } from "../lib/localStorage";
 import {
@@ -15,8 +15,22 @@ const filteredItemsByGargabeType = (
     selectedTrash.map((t) => mapGarbageToItem(t, i)).includes(true)
   );
 
+const fetchEvents = (url: string, selectedTrash: ITrash[]) => () => {
+  return fetch(url, {
+    headers: { "x-api-key": "CT5MwfFu2EaN32n7ngNzH3IkLOewauZd7EeV1nJz" },
+  }).then((res) => res.json())
+    .then(({ events }) => {
+      const items = filteredItemsByGargabeType(
+        transformEvent(events),
+        selectedTrash
+      );
+      return items
+    }).catch(() => {
+      return []
+    })
+}
+
 export const fetchAndTranslate = () => {
-  const [items, setItems] = useState<Item[]>([]);
   const { state } = useAppState();
   const { selectedTrash } = state;
   const { cityId, streetId } = state.location;
@@ -27,26 +41,17 @@ export const fetchAndTranslate = () => {
       streetId ? streetId : cityId
     }`;
 
-  useEffect(() => {
-    fetch(url, {
-      headers: { "x-api-key": "CT5MwfFu2EaN32n7ngNzH3IkLOewauZd7EeV1nJz" },
-    })
-      .then((res) => {
-        return res.json();
-      })
-      .then(({ events }) => {
-        const items = filteredItemsByGargabeType(
-          transformEvent(events),
-          state.selectedTrash
-        );
-        setItems(items);
-        appStateToLocalStorage({ ...state, items });
-      })
-      .catch((e) => {
-        console.log("Error couldnt fetch data ", e);
-        console.log("The fetched url was ", url);
-      });
-  }, [url, selectedTrash]);
+  
 
-  return items;
-};
+  return useQuery<Item[], Error>(['fetchData', url, selectedTrash], fetchEvents(url, selectedTrash),{
+    onSuccess: (items: Item[]) => {
+      appStateToLocalStorage({ ...state, items });
+    },
+    onError: (e: Error) => {
+      console.log("Error couldnt fetch data ", e);
+      console.log("The fetched url was ", url); 
+    },
+    retry: 25,
+    retryDelay: 500,
+  });
+}

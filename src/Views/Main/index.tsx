@@ -34,9 +34,9 @@ const RenderItem: ListRenderItem<Item> = ({ item }) => {
 };
 
 export const Main: React.FC = () => {
-  const items = fetchAndTranslate();
+  const { data: items } = fetchAndTranslate();
 
-  if (items.length < 1) return null;
+  if (!items || items.length < 1) return null;
 
   const futureEvents = items.filter(
     (v) =>
