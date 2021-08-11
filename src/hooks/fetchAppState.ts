@@ -7,7 +7,6 @@ export const fetchFromLocalStorage = () => {
 
   return useQuery<AppState, Error>("localStorage", localStorageToAppState, {
     onSuccess: (state) =>
-      state &&
       dispatch({
         type: "update",
         payload: { ...state },

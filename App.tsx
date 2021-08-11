@@ -16,13 +16,12 @@ const queryClient = new QueryClient();
 const title = "Abfall App";
 
 const Navigator: React.FC = () => {
-  const { isLoading, isFetching } = fetchFromLocalStorage();
-  const { state } = useAppState();
+  const { isLoading, isFetching, data: state } = fetchFromLocalStorage();
   if (isLoading || isFetching) {
     return <Loading />;
   }
   const initialRoute =
-    state.location.cityId === "" ? AppScreens.Location : AppScreens.Main;
+    state?.location.cityId === "" ? AppScreens.Location : AppScreens.Main;
   return (
     <Stack.Navigator initialRouteName={initialRoute}>
       <Stack.Screen

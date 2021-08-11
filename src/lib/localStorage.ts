@@ -1,5 +1,5 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { AppState } from "../components/AppContext";
+import { AppState, initialAppState } from "../components/AppContext";
 
 export const appStateToLocalStorage = async (config: AppState) => {
   try {
@@ -14,7 +14,7 @@ export const appStateToLocalStorage = async (config: AppState) => {
 export const localStorageToAppState = async () => {
   try {
     const jsonConfig = await AsyncStorage.getItem("@storage_app_config");
-    return jsonConfig != null ? JSON.parse(jsonConfig) : null;
+    return jsonConfig != null ? JSON.parse(jsonConfig) : initialAppState;
   } catch (e) {
     console.log("Error ", e);
     console.log("Couldn't get config for localstorage");

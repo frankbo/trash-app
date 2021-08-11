@@ -1,6 +1,5 @@
 import * as React from "react";
 import { ILocation } from "../Views/Location";
-import { Item } from "../Views/Main";
 
 export interface ITrash {
   id: string;
@@ -22,7 +21,7 @@ interface IAction {
 type Dispatch = (action: IAction) => void;
 
 const sixteenHours = 57600000;
-const initialAppState: AppState = {
+export const initialAppState: AppState = {
   location: {
     cityId: "",
     streetId: "",
