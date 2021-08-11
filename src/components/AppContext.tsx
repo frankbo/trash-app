@@ -10,7 +10,6 @@ export interface ITrash {
 
 export interface AppState {
   location: ILocation;
-  items: Item[];
   notifyBefore: number;
   selectedTrash: ITrash[];
 }
@@ -28,7 +27,6 @@ const initialAppState: AppState = {
     cityId: "",
     streetId: "",
   },
-  items: [],
   notifyBefore: sixteenHours,
   selectedTrash: [
     { id: "1.2", value: "Biomüll", isChecked: true },

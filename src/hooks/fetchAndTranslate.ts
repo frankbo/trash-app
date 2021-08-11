@@ -41,12 +41,8 @@ export const fetchAndTranslate = () => {
       streetId ? streetId : cityId
     }`;
 
-  
-
   return useQuery<Item[], Error>(['fetchData', url, selectedTrash], fetchEvents(url, selectedTrash),{
-    onSuccess: (items: Item[]) => {
-      appStateToLocalStorage({ ...state, items });
-    },
+    onSuccess: () => appStateToLocalStorage(state),
     onError: (e: Error) => {
       console.log("Error couldnt fetch data ", e);
       console.log("The fetched url was ", url); 
