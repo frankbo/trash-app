@@ -16,38 +16,40 @@ const filteredItemsByGargabeType = (
   );
 
 const fetchEvents = (url: string, selectedTrash: ITrash[]) => () => {
-  return fetch(url, {
-    headers: { "x-api-key": "CT5MwfFu2EaN32n7ngNzH3IkLOewauZd7EeV1nJz" },
-  }).then((res) => res.json())
+  return fetch(url)
+    .then((res) => res.json())
     .then(({ events }) => {
       const items = filteredItemsByGargabeType(
         transformEvent(events),
         selectedTrash
       );
-      return items
-    }).catch(() => {
-      return []
+      return items;
     })
-}
+    .catch(() => {
+      return [];
+    });
+};
 
 export const fetchAndTranslate = () => {
   const { state } = useAppState();
   const { selectedTrash } = state;
   const { cityId, streetId } = state.location;
-  const baseUrl = "https://w70x9ep0ch.execute-api.eu-central-1.amazonaws.com";
+  const baseUrl = "https://w54k0cafpa.execute-api.eu-central-1.amazonaws.com";
   const url =
     baseUrl +
-    `/production/events?locationId=${cityId}&streetId=${
-      streetId ? streetId : cityId
-    }`;
+    `/v1/events?locationId=${cityId}&streetId=${streetId ? streetId : cityId}`;
 
-  return useQuery<Item[], Error>(['fetchData', url, selectedTrash], fetchEvents(url, selectedTrash),{
-    onSuccess: () => appStateToLocalStorage(state),
-    onError: (e: Error) => {
-      console.log("Error couldnt fetch data ", e);
-      console.log("The fetched url was ", url); 
-    },
-    retry: 25,
-    retryDelay: 500,
-  });
-}
+  return useQuery<Item[], Error>(
+    ["fetchData", url, selectedTrash],
+    fetchEvents(url, selectedTrash),
+    {
+      onSuccess: () => appStateToLocalStorage(state),
+      onError: (e: Error) => {
+        console.log("Error couldnt fetch data ", e);
+        console.log("The fetched url was ", url);
+      },
+      retry: 25,
+      retryDelay: 500,
+    }
+  );
+};
