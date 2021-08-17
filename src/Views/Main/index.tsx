@@ -7,7 +7,7 @@ import { LoadingIndicator } from "../../components/LoadingIndicator";
 export interface Item {
   location: string;
   summary: string;
-  dateStart: string;
+  startDate: string;
   description: string;
   kind: "blue" | "yellow" | "green" | "black" | "brown" | "white" | undefined;
 }
@@ -21,7 +21,7 @@ const renderDelimiter = (date: Date) => {
 };
 
 const RenderItem: ListRenderItem<Item> = ({ item }) => {
-  const date = new Date(item.dateStart);
+  const date = new Date(item.startDate);
 
   return (
     <View>
@@ -37,12 +37,12 @@ const RenderItem: ListRenderItem<Item> = ({ item }) => {
 export const Main: React.FC = () => {
   const { data: items, isFetching, isLoading } = fetchAndTranslate();
 
-  if (isFetching || isLoading ) return <LoadingIndicator />;
+  if (isFetching || isLoading) return <LoadingIndicator />;
   if (!items || items.length < 1) return null;
 
   const futureEvents = items.filter(
     (v) =>
-      new Date(v.dateStart).getTime() >=
+      new Date(v.startDate).getTime() >=
       new Date(new Date().setHours(0, 0, 0, 0)).getTime()
   );
 
@@ -51,7 +51,7 @@ export const Main: React.FC = () => {
       <FlatList
         data={futureEvents}
         renderItem={RenderItem}
-        keyExtractor={(item) => item.dateStart + item.kind}
+        keyExtractor={(item) => item.startDate + item.kind}
       />
     </View>
   );
